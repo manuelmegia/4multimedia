@@ -26,29 +26,34 @@ class MainActivity : AppCompatActivity() {
         var botonSum = findViewById<Button>(R.id.button2)
         var mensajeTextView = findViewById<TextView>(R.id.textView)
         var editText = findViewById<EditText>(R.id.editText)
-        if (!editText.isFocused){
-            cambiarColor(botonRes, "#ffcc0000")
-            cambiarColor(botonSum, "#ff669900")
-            botonSum.setOnClickListener {
-                cambiarColor(botonSum, "#ff669900")
-                cambiarColor(botonRes, "#ffcc0000")
-                cont += editText.text.toString().toInt()
-                mensajeTextView.text = cont.toString()
-            }
-
-        botonRes.setOnClickListener {
-            if (cont - editText.text.toString().toInt() >= 0) cont -= editText.text.toString()
-                .toInt()
-            if (cont == 0) {
+        editText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
                 cambiarColor(botonRes, "#9b9b9b")
-            }
-            mensajeTextView.text = cont.toString()
-        }
-        editText.setOnClickListener{
-            cambiarColor(botonRes, "#9b9b9b")
-            cambiarColor(botonSum, "#9b9b9b")
-        }
+                cambiarColor(botonSum, "#9b9b9b")
+                botonRes.isEnabled = false
+                botonSum.isEnabled = false
+            } else {
+                botonRes.isEnabled = true
+                botonSum.isEnabled = true
+                cambiarColor(botonRes, "#ffcc0000")
+                cambiarColor(botonSum, "#ff669900")
+                botonSum.setOnClickListener {
+                    if (cont == 0) cambiarColor(botonRes, "#ffcc0000")
+                    cont += editText.text.toString().toInt()
+                    mensajeTextView.text = cont.toString()
+                }
 
+                botonRes.setOnClickListener {
+                    if (cont - editText.text.toString().toInt() >= 0) cont -= editText.text.toString()
+                        .toInt()
+                    if (cont == 0) {
+                        cambiarColor(botonRes, "#9b9b9b")
+                    }
+                    mensajeTextView.text = cont.toString()
+                }
+            }
+        }
+        if (editText.isFocused){
         }
     }
 
