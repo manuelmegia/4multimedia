@@ -15,13 +15,6 @@
 
         </EditText>
 
-        <EditText
-            android:id="@+id/deus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </EditText>
-
     </TableRow>
 
     <TableRow
@@ -33,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/holo_red_dark"
-            android:enabled="false"
+            android:enabled="true"
             android:text="-" />
 
         <Button
@@ -41,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/holo_green_dark"
-            android:enabled="false"
+            android:enabled="true"
             android:text="+" />
     </TableRow>
 
@@ -55,6 +48,6 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:numeric="integer"
-            android:text="1" />
+            android:text="0" />
     </TableRow>
 </TableLayout>

@@ -15,8 +15,7 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    var cont = 1
-
+    var cont = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,34 +29,24 @@ class MainActivity : AppCompatActivity() {
             if (hasFocus) {
                 cambiarColor(botonRes, "#9b9b9b")
                 cambiarColor(botonSum, "#9b9b9b")
-                botonRes.isEnabled = false
-                botonSum.isEnabled = false
             } else {
-                botonRes.isEnabled = true
-                botonSum.isEnabled = true
                 cambiarColor(botonRes, "#ffcc0000")
                 cambiarColor(botonSum, "#ff669900")
-                botonSum.setOnClickListener {
-                    if (cont == 0) cambiarColor(botonRes, "#ffcc0000")
-                    cont += editText.text.toString().toInt()
-                    mensajeTextView.text = cont.toString()
-                }
-
-                botonRes.setOnClickListener {
-                    if (cont - editText.text.toString().toInt() >= 0) cont -= editText.text.toString()
-                        .toInt()
-                    if (cont == 0) {
-                        cambiarColor(botonRes, "#9b9b9b")
-                    }
-                    mensajeTextView.text = cont.toString()
-                }
             }
         }
-        if (editText.isFocused){
+        botonSum.setOnClickListener {
+            cont += editText.text.toString().toInt()
+            mensajeTextView.text = cont.toString()
+        }
+
+        botonRes.setOnClickListener {
+            if (cont - editText.text.toString().toInt() >= 0) cont -= editText.text.toString()
+                .toInt()
+            mensajeTextView.text = cont.toString()
         }
     }
 
-    fun cambiarColor(cambView: View, color: String){
+    private fun cambiarColor(cambView: View, color: String){
         val colorStateList = ColorStateList.valueOf(Color.parseColor(color))
         cambView.backgroundTintList = colorStateList
     }
